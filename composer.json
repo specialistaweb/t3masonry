@@ -1,0 +1,44 @@
+{
+    "name": "specialistaweb/t3masonry",
+    "type": "typo3-cms-extension",
+    "description": "T3Masonry: five image gallery layouts, CSS only (classic masonry, captions below, justified rows, spotlight, essential) for the content elements image, textpic, media and textmedia, with the bootstrap_package lightbox. Requires bootstrap_package (Bootstrap 5).",
+    "keywords": [
+        "TYPO3",
+        "image",
+        "gallery",
+        "masonry",
+        "justified",
+        "lightbox",
+        "bootstrap5",
+        "bootstrap"
+    ],
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Alessandro Tuveri",
+            "role": "Developer"
+        },
+        {
+            "name": "Giulia Tuveri",
+            "email": "gt@specialistaweb.it",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "bk2k/bootstrap-package": "^14.0 || ^15.0 || ^16.0",
+        "typo3/cms-core": "^12.4 || ^13.4 || ^14.3",
+        "typo3/cms-fluid": "^12.4 || ^13.4 || ^14.3",
+        "typo3/cms-frontend": "^12.4 || ^13.4 || ^14.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "SpecialistaWeb\\T3Masonry\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "t3masonry"
+        }
+    }
+}

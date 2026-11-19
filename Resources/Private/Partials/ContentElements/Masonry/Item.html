@@ -1,0 +1,61 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:bk2k="http://typo3.org/ns/BK2K/BootstrapPackage/ViewHelpers" xmlns:t3m="http://typo3.org/ns/SpecialistaWeb/T3Masonry/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    One image of a T3Masonry gallery.
+    --w / --h: proportions of the visible (cropped) image, used by the stylesheet to place it before it loads.
+    Click: the image link if set, otherwise the bootstrap_package lightbox (PhotoSwipe) when enabled.
+    Texts are plain text: tags removed and escaped (the lightbox shows them as HTML).
+</f:comment>
+<f:variable name="info" value="{t3m:imageInfo(image: file, maxWidth: settings.T3MimageMaxWidth, columns: cols, layout: kind)}" />
+<f:variable name="title">{file.title -> f:format.stripTags()}</f:variable>
+<f:variable name="text">{file.description -> f:format.stripTags()}</f:variable>
+<li class="mg-item" style="--w:{info.width};--h:{info.height}">
+    <figure class="mg-figure">
+        <f:if condition="{file.link}">
+            <f:then>
+                <f:link.typolink parameter="{file.link}" class="mg-open"><f:render section="Media" arguments="{_all}" /></f:link.typolink>
+            </f:then>
+            <f:else>
+                <f:if condition="{lightbox} == 1">
+                    <f:then>
+                        <bk2k:link.lightbox
+                            image="{file}"
+                            maxHeight="{settings.lightbox.image.maxHeight}"
+                            maxWidth="{settings.lightbox.image.maxWidth}"
+                            class="{settings.lightbox.cssClass} mg-open"
+                            rel="{settings.lightbox.prefix}-{data.uid}"
+                            lightbox-title="{title -> f:format.htmlspecialchars()}"
+                            lightbox-alt="{file.alternative -> f:format.stripTags() -> f:format.htmlspecialchars()}"
+                            lightbox-caption="{text -> f:format.htmlspecialchars()}"
+                        ><span class="visually-hidden"><f:translate key="lightbox.screenreader.label" extensionName="bootstrap_package" /></span><f:render section="Media" arguments="{_all}" /></bk2k:link.lightbox>
+                    </f:then>
+                    <f:else>
+                        <span class="mg-open"><f:render section="Media" arguments="{_all}" /></span>
+                    </f:else>
+                </f:if>
+            </f:else>
+        </f:if>
+        <f:if condition="{kind} != 'pure' && ({title} || {text})">
+            <figcaption class="mg-caption">
+                <f:if condition="{title}"><span class="mg-title">{title}</span></f:if>
+                <f:if condition="{text}"><span class="mg-sub">{text}</span></f:if>
+            </figcaption>
+        </f:if>
+    </figure>
+</li>
+
+<f:section name="Media">
+    <f:if condition="{kind} == 'cards'">
+        <f:then><span class="mg-img"><f:render section="Picture" arguments="{_all}" /></span></f:then>
+        <f:else><f:render section="Picture" arguments="{_all}" /></f:else>
+    </f:if>
+</f:section>
+
+<f:section name="Picture">
+    <f:variable name="alt">{file.alternative -> f:format.stripTags()}</f:variable>
+    <f:if condition="!{alt}"><f:variable name="alt" value="{title}" /></f:if>
+    <f:if condition="{info.large} > 0">
+        <f:then><img src="{f:uri.image(image: file, maxWidth: info.large)}" srcset="{f:uri.image(image: file, maxWidth: info.small)} {info.small}w, {f:uri.image(image: file, maxWidth: info.large)} {info.large}w" sizes="{info.sizes}" width="{info.width}" height="{info.height}" alt="{alt}" loading="lazy" decoding="async" /></f:then>
+        <f:else><img src="{f:uri.image(image: file)}" width="{info.width}" height="{info.height}" alt="{alt}" loading="lazy" decoding="async" /></f:else>
+    </f:if>
+</f:section>
+</html>

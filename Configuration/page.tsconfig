@@ -1,0 +1,34 @@
+# T3Masonry: entries of the "Layout" select (tt_content.layout).
+# Loaded automatically for every page (TYPO3 12+), no registration needed.
+
+TCEFORM.tt_content.layout.types.textpic.addItems {
+  2950 = T3Masonry - Classic
+  2951 = T3Masonry - Captions below
+  2952 = T3Masonry - Justified rows
+  2953 = T3Masonry - Spotlight
+  2954 = T3Masonry - Essential
+}
+
+TCEFORM.tt_content.layout.types.textmedia.addItems {
+  2950 = T3Masonry - Classic
+  2951 = T3Masonry - Captions below
+  2952 = T3Masonry - Justified rows
+  2953 = T3Masonry - Spotlight
+  2954 = T3Masonry - Essential
+}
+
+TCEFORM.tt_content.layout.types.image.addItems {
+  2950 = T3Masonry - Classic
+  2951 = T3Masonry - Captions below
+  2952 = T3Masonry - Justified rows
+  2953 = T3Masonry - Spotlight
+  2954 = T3Masonry - Essential
+}
+
+TCEFORM.tt_content.layout.types.media.addItems {
+  2950 = T3Masonry - Classic
+  2951 = T3Masonry - Captions below
+  2952 = T3Masonry - Justified rows
+  2953 = T3Masonry - Spotlight
+  2954 = T3Masonry - Essential
+}

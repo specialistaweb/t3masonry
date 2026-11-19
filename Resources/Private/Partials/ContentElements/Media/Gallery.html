@@ -1,0 +1,33 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    T3Masonry: gallery wrapper.
+    Used instead of the bootstrap_package partial only when tt_content.layout is one of the
+    T3Masonry layouts (see Configuration/TypoScript/setup.typoscript). Only image files are shown.
+
+    2950 Classic | 2951 Captions below | 2952 Justified rows | 2953 Spotlight | 2954 Essential
+</f:comment>
+<f:if condition="{files}">
+    <f:render partial="Masonry/Assets" arguments="{settings: settings}" />
+    <f:variable name="masonry" value=" mg-masonry" />
+    <f:switch expression="{data.layout}">
+        <f:case value="2951"><f:variable name="kind" value="cards" /></f:case>
+        <f:case value="2952"><f:variable name="kind" value="justified" /><f:variable name="masonry" value="" /></f:case>
+        <f:case value="2953"><f:variable name="kind" value="spotlight" /></f:case>
+        <f:case value="2954"><f:variable name="kind" value="pure" /></f:case>
+        <f:defaultCase><f:variable name="kind" value="classic" /></f:defaultCase>
+    </f:switch>
+    <f:variable name="cols">{data.imagecols as integer}</f:variable>
+    <f:if condition="{cols} < 1 || {cols} > 6"><f:variable name="cols" value="4" /></f:if>
+    <f:variable name="lightbox" value="0" />
+    <f:if condition="{settings.T3MforceLightbox} == 1 || {data.image_zoom}"><f:variable name="lightbox" value="1" /></f:if>
+    <div class="mg mg-{kind}{masonry} mg-cols-{cols}">
+        <ul class="mg-list">
+            <f:for each="{files}" as="file">
+                <f:if condition="{file.type} == 2">
+                    <f:render partial="Masonry/Item" arguments="{file: file, data: data, settings: settings, kind: kind, cols: cols, lightbox: lightbox}" />
+                </f:if>
+            </f:for>
+        </ul>
+    </div>
+</f:if>
+</html>

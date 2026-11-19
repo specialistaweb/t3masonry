@@ -1,0 +1,5 @@
+name: specialistaweb/t3masonry
+label: 'T3Masonry'
+# The full package brings the lightbox (PhotoSwipe) used by the galleries.
+dependencies:
+  - bootstrap-package/full

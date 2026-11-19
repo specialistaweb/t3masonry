@@ -1,0 +1,149 @@
+/*
+ * T3Masonry. CSS only (no JavaScript of its own; the lightbox is the
+ * PhotoSwipe lightbox of bootstrap_package).
+ * Layout numbers (tt_content.layout): 2950 Classic, 2951 Captions below, 2952 Justified rows,
+ * 2953 Spotlight, 2954 Essential.
+ * Every item carries the proportions of its (cropped) image as --w / --h, so the browser computes
+ * the layout before the images are loaded. Colours and sizes come from the site settings
+ * (inline variables on .mg).
+ */
+.mg {
+    --mg-accent: #3d5afe;
+    --mg-ink: #12141a;
+    --mg-muted: #5d6472;
+    --mg-placeholder: #e9ecf1;
+    --mg-gap: 16px;
+    --mg-gap-compact: 10px;
+    --mg-radius: 14px;
+    --mg-row: 240px;
+    --mg-mobile-cols: 2;
+    --mg-ease: cubic-bezier(.2, .7, .2, 1);
+    --mg-cols: 4;
+    margin-bottom: var(--mg-gap);
+    container-type: inline-size;
+}
+.mg-cols-1 { --mg-cols: 1; }
+.mg-cols-2 { --mg-cols: 2; }
+.mg-cols-3 { --mg-cols: 3; }
+.mg-cols-4 { --mg-cols: 4; }
+.mg-cols-5 { --mg-cols: 5; }
+.mg-cols-6 { --mg-cols: 6; }
+@media (max-width: 991px) { .mg-cols-4, .mg-cols-5, .mg-cols-6 { --mg-cols: 3; } }
+@media (max-width: 575px) { .mg-cols-2, .mg-cols-3, .mg-cols-4, .mg-cols-5, .mg-cols-6 { --mg-cols: var(--mg-mobile-cols); } }
+
+.mg .mg-list { list-style: none; margin: 0; padding: 0; }
+.mg .mg-item { position: relative; min-width: 0; margin: 0; padding: 0; }
+.mg .mg-item::before { content: none; }
+.mg-figure { position: relative; height: 100%; margin: 0; overflow: hidden; border-radius: var(--mg-radius); background: var(--mg-placeholder); }
+.mg-open { position: relative; display: block; height: 100%; color: inherit; text-decoration: none; border-radius: inherit; }
+a.mg-open { cursor: zoom-in; }
+a.mg-open[href]:not(.lightbox) { cursor: pointer; }
+.mg-open:focus-visible { outline: 3px solid var(--mg-accent); outline-offset: 3px; }
+.mg .mg-open img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.mg-caption { pointer-events: none; }
+.mg-title { display: block; font-weight: 700; line-height: 1.25; }
+.mg-sub { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: .85rem; line-height: 1.35; }
+
+/* ---------------------------------------------------------------- masonry (2950, 2951, 2953, 2954)
+   Fallback for every browser: CSS columns (order top to bottom).
+   Modern browsers: grid where every image spans rows in proportion to its size (order left to right). */
+.mg-masonry .mg-list { column-count: var(--mg-cols); column-gap: var(--mg-gap); }
+.mg-masonry .mg-item { break-inside: avoid; margin-bottom: var(--mg-gap); }
+.mg-masonry .mg-figure { height: auto; aspect-ratio: var(--w) / var(--h); }
+@supports (container-type: inline-size) and (grid-row-end: span calc(2 * 3)) {
+    .mg-masonry .mg-list {
+        --mg-unit: calc((100cqw - (var(--mg-cols) - 1) * var(--mg-gap)) / var(--mg-cols) / 40);
+        display: grid;
+        column-count: auto;
+        grid-template-columns: repeat(var(--mg-cols), minmax(0, 1fr));
+        grid-auto-rows: var(--mg-unit);
+        grid-auto-flow: row dense;
+        column-gap: var(--mg-gap);
+        row-gap: 0;
+    }
+    .mg-masonry .mg-item {
+        margin: 0;
+        padding-bottom: var(--mg-gap);
+        grid-row-end: span calc(40 * var(--h) / var(--w) + var(--mg-extra, 0));
+    }
+    .mg-masonry .mg-figure { height: 100%; aspect-ratio: auto; }
+}
+
+/* 2950 Classic: zoom and caption on hover */
+.mg-classic .mg-open img { transition: transform .9s var(--mg-ease); }
+.mg-classic .mg-caption {
+    position: absolute; inset: auto 0 0 0; padding: 2.5rem 1rem .9rem; color: #fff;
+    background: linear-gradient(transparent, rgba(8, 10, 16, .75));
+    opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .45s var(--mg-ease);
+}
+.mg-classic .mg-sub { opacity: .88; }
+.mg-classic .mg-item:is(:hover, :focus-within) .mg-open img { transform: scale(1.06); }
+.mg-classic .mg-item:is(:hover, :focus-within) .mg-caption { opacity: 1; transform: none; }
+@media (hover: none) { .mg-classic .mg-caption { opacity: 1; transform: none; padding-top: 1.5rem; } }
+
+/* 2951 Captions below: extra grid rows (a share of the column width) hold the texts */
+.mg-cards { --mg-extra: 11; }
+@media (max-width: 991px) { .mg-cards { --mg-extra: 13; } }
+@media (max-width: 575px) { .mg-cards { --mg-extra: 17; } }
+.mg-cards .mg-figure { display: flex; flex-direction: column; overflow: visible; background: none; border-radius: 0; }
+.mg-cards .mg-open { flex: 1; min-height: 0; border-radius: var(--mg-radius); }
+.mg-cards .mg-img { display: block; height: 100%; overflow: hidden; border-radius: var(--mg-radius); background: var(--mg-placeholder); }
+.mg-cards .mg-img img { transition: transform .9s var(--mg-ease); }
+.mg-cards .mg-caption { flex: none; padding: .6rem .1rem 0; color: var(--mg-ink); }
+.mg-cards .mg-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mg-cards .mg-sub { color: var(--mg-muted); }
+.mg-cards .mg-item:is(:hover, :focus-within) .mg-img img { transform: scale(1.05); }
+@supports (container-type: inline-size) and (grid-row-end: span calc(2 * 3)) {
+    /* the caption gets exactly the extra rows: never overlaps the next image */
+    .mg-cards .mg-caption { height: calc(var(--mg-extra) * var(--mg-unit)); overflow: hidden; }
+}
+@supports not ((container-type: inline-size) and (grid-row-end: span calc(2 * 3))) {
+    .mg-cards .mg-figure { aspect-ratio: auto; }
+    .mg-cards .mg-open { flex: none; aspect-ratio: var(--w) / var(--h); }
+}
+
+/* 2952 Justified rows: rows of the same height, widths follow the images, nothing is cropped */
+.mg-justified .mg-list { display: flex; flex-wrap: wrap; gap: var(--mg-gap); }
+.mg-justified .mg-list::after { content: ""; flex-grow: 999; }
+.mg-justified .mg-item { flex: calc(var(--w) / var(--h)) 1 calc(var(--mg-row) * var(--w) / var(--h)); }
+@media (max-width: 575px) { .mg-justified .mg-item { flex-basis: calc(var(--mg-row) * .6 * var(--w) / var(--h)); } }
+.mg-justified .mg-figure { height: auto; aspect-ratio: var(--w) / var(--h); }
+.mg-justified .mg-open img { transition: transform .9s var(--mg-ease); }
+.mg-justified .mg-caption {
+    position: absolute; left: .6rem; bottom: .6rem; max-width: calc(100% - 1.2rem);
+    padding: .35rem .7rem; border-radius: 999px; background: rgba(255, 255, 255, .92); color: #12141a;
+    font-size: .85rem;
+    opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .4s var(--mg-ease);
+}
+.mg-justified .mg-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mg-justified .mg-sub { display: none; }
+.mg-justified .mg-item:is(:hover, :focus-within) .mg-open img { transform: scale(1.05); }
+.mg-justified .mg-item:is(:hover, :focus-within) .mg-caption { opacity: 1; transform: none; }
+
+/* 2953 Spotlight: compact, the other images fade to grey */
+.mg.mg-spotlight { --mg-gap: var(--mg-gap-compact); --mg-radius-local: calc(var(--mg-radius) / 2); }
+.mg-spotlight .mg-figure { border-radius: var(--mg-radius-local); }
+.mg-spotlight .mg-item { transition: opacity .4s ease, filter .4s ease; }
+.mg-spotlight .mg-list:has(.mg-item:is(:hover, :focus-within)) .mg-item:not(:hover):not(:focus-within) { opacity: .35; filter: grayscale(1); }
+.mg-spotlight .mg-open img { transition: transform 1s var(--mg-ease); }
+.mg-spotlight .mg-item:is(:hover, :focus-within) .mg-open img { transform: scale(1.04); }
+.mg-spotlight .mg-caption {
+    position: absolute; top: .6rem; left: .6rem; max-width: calc(100% - 1.2rem);
+    padding: .3rem .65rem; border-radius: 6px; background: var(--mg-accent); color: #fff; font-size: .8rem;
+    opacity: 0; transition: opacity .3s ease;
+}
+.mg-spotlight .mg-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mg-spotlight .mg-sub { display: none; }
+.mg-spotlight .mg-item:is(:hover, :focus-within) .mg-caption { opacity: 1; }
+
+/* 2954 Essential: only the photos, square corners; title and description appear in the lightbox */
+.mg.mg-pure { --mg-gap: var(--mg-gap-compact); }
+.mg-pure .mg-figure, .mg-pure .mg-open { border-radius: 0; }
+.mg-pure .mg-open img { transition: filter .35s ease, transform .9s var(--mg-ease); }
+.mg-pure .mg-item:is(:hover, :focus-within) .mg-open img { filter: brightness(1.08) saturate(1.1); transform: scale(1.02); }
+.mg-pure .mg-open:focus-visible { outline-offset: -3px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .mg *, .mg *::before, .mg *::after { transition-duration: .01ms !important; }
+    .mg .mg-open img { transform: none !important; }
+}

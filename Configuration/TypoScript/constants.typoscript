@@ -1,0 +1,36 @@
+# T3Masonry: constants.
+# Used when the extension is included as static TypoScript template (sys_template record).
+# Sites using the site set get the same values from Configuration/Sets/Masonry/settings.definitions.yaml.
+# Keep the defaults of the two files in sync.
+
+# customsubcategory=general=General
+# customsubcategory=colors=Colours
+# customsubcategory=size=Size
+plugin.tx_t3masonry {
+  settings {
+    # cat=bootstrap package: t3masonry/general/010; type=boolean; label=Lightbox on every image: On: a click on an image opens the lightbox even without "Enlarge on click". Off: only content elements with "Enlarge on click". Images with a link always open the link.
+    forceLightbox = 1
+    # cat=bootstrap package: t3masonry/general/020; type=int+; label=Maximum image width (px): Largest width delivered in the gallery (a half size is added for small screens). 0 = original file.
+    imageMaxWidth = 900
+    # cat=bootstrap package: t3masonry/general/030; type=string; label=Stylesheet: Path of the stylesheet with the layouts. Change it only to use your own copy.
+    cssFile = EXT:t3masonry/Resources/Public/Css/masonry.css
+    # cat=bootstrap package: t3masonry/colors/040; type=color; label=Accent colour: Focus ring and title badge of the spotlight layout.
+    accentColor = #3d5afe
+    # cat=bootstrap package: t3masonry/colors/050; type=color; label=Text colour: Titles of the "captions below" layout.
+    textColor = #12141a
+    # cat=bootstrap package: t3masonry/colors/060; type=color; label=Secondary text colour: Descriptions of the "captions below" layout.
+    mutedColor = #5d6472
+    # cat=bootstrap package: t3masonry/colors/070; type=color; label=Placeholder colour: Shown while an image is loading.
+    placeholderColor = #e9ecf1
+    # cat=bootstrap package: t3masonry/size/080; type=int+; label=Space between the images (px): Classic, captions below and justified rows.
+    gap = 16
+    # cat=bootstrap package: t3masonry/size/090; type=int+; label=Compact space between the images (px): Spotlight and essential.
+    compactGap = 10
+    # cat=bootstrap package: t3masonry/size/100; type=int+; label=Corner radius (px): Classic, captions below, justified rows; half of it for spotlight. Essential always has square corners.
+    radius = 14
+    # cat=bootstrap package: t3masonry/size/110; type=int+; label=Row height of the justified rows (px): On phones 60% of this value.
+    rowHeight = 240
+    # cat=bootstrap package: t3masonry/size/120; type=int+; label=Columns on phones: 1 or 2.
+    mobileColumns = 2
+  }
+}

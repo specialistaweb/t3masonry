@@ -1,0 +1,15 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    Stylesheet and variables, registered once per page and only on pages with a T3Masonry layout.
+    Numbers are cast to integers; texts are escaped (the values come from site settings / constants).
+</f:comment>
+<f:variable name="gap">{settings.T3Mgap as integer}</f:variable>
+<f:variable name="compactGap">{settings.T3McompactGap as integer}</f:variable>
+<f:variable name="radius">{settings.T3Mradius as integer}</f:variable>
+<f:variable name="rowHeight">{settings.T3MrowHeight as integer}</f:variable>
+<f:if condition="{rowHeight} < 60"><f:variable name="rowHeight" value="240" /></f:if>
+<f:variable name="mobileColumns" value="2" />
+<f:if condition="{settings.T3MmobileColumns} == 1"><f:variable name="mobileColumns" value="1" /></f:if>
+<f:asset.css identifier="t3masonry" href="{settings.T3McssFile}" />
+<f:asset.css identifier="t3masonry-variables">.mg{--mg-accent:{settings.T3MaccentColor -> f:format.stripTags() -> f:format.htmlspecialchars()};--mg-ink:{settings.T3MtextColor -> f:format.stripTags() -> f:format.htmlspecialchars()};--mg-muted:{settings.T3MmutedColor -> f:format.stripTags() -> f:format.htmlspecialchars()};--mg-placeholder:{settings.T3MplaceholderColor -> f:format.stripTags() -> f:format.htmlspecialchars()};--mg-gap:{gap}px;--mg-gap-compact:{compactGap}px;--mg-radius:{radius}px;--mg-row:{rowHeight}px;--mg-mobile-cols:{mobileColumns}}</f:asset.css>
+</html>

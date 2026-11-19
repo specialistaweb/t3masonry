@@ -1,0 +1,95 @@
+# T3Masonry
+# Requires bootstrap_package (content elements image, textpic, media, textmedia and its lightbox).
+
+# Partials of this extension are added on top of the bootstrap_package ones,
+# but only for content elements using one of the T3Masonry layouts (tt_content.layout).
+# Every other layout keeps the plain bootstrap_package rendering.
+tt_content.image.partialRootPaths {
+  2950 = EXT:t3masonry/Resources/Private/Partials/ContentElements/
+  2950.stdWrap.if {
+    value = 2950,2951,2952,2953,2954
+    isInList.field = layout
+  }
+}
+tt_content.textpic.partialRootPaths {
+  2950 = EXT:t3masonry/Resources/Private/Partials/ContentElements/
+  2950.stdWrap.if {
+    value = 2950,2951,2952,2953,2954
+    isInList.field = layout
+  }
+}
+tt_content.media.partialRootPaths {
+  2950 = EXT:t3masonry/Resources/Private/Partials/ContentElements/
+  2950.stdWrap.if {
+    value = 2950,2951,2952,2953,2954
+    isInList.field = layout
+  }
+}
+tt_content.textmedia.partialRootPaths {
+  2950 = EXT:t3masonry/Resources/Private/Partials/ContentElements/
+  2950.stdWrap.if {
+    value = 2950,2951,2952,2953,2954
+    isInList.field = layout
+  }
+}
+
+# Settings handed over to the partials as {settings.T3M...}
+tt_content.image.settings {
+  T3MforceLightbox = {$plugin.tx_t3masonry.settings.forceLightbox}
+  T3MimageMaxWidth = {$plugin.tx_t3masonry.settings.imageMaxWidth}
+  T3McssFile = {$plugin.tx_t3masonry.settings.cssFile}
+  T3MaccentColor = {$plugin.tx_t3masonry.settings.accentColor}
+  T3MtextColor = {$plugin.tx_t3masonry.settings.textColor}
+  T3MmutedColor = {$plugin.tx_t3masonry.settings.mutedColor}
+  T3MplaceholderColor = {$plugin.tx_t3masonry.settings.placeholderColor}
+  T3Mgap = {$plugin.tx_t3masonry.settings.gap}
+  T3McompactGap = {$plugin.tx_t3masonry.settings.compactGap}
+  T3Mradius = {$plugin.tx_t3masonry.settings.radius}
+  T3MrowHeight = {$plugin.tx_t3masonry.settings.rowHeight}
+  T3MmobileColumns = {$plugin.tx_t3masonry.settings.mobileColumns}
+}
+tt_content.textpic.settings {
+  T3MforceLightbox = {$plugin.tx_t3masonry.settings.forceLightbox}
+  T3MimageMaxWidth = {$plugin.tx_t3masonry.settings.imageMaxWidth}
+  T3McssFile = {$plugin.tx_t3masonry.settings.cssFile}
+  T3MaccentColor = {$plugin.tx_t3masonry.settings.accentColor}
+  T3MtextColor = {$plugin.tx_t3masonry.settings.textColor}
+  T3MmutedColor = {$plugin.tx_t3masonry.settings.mutedColor}
+  T3MplaceholderColor = {$plugin.tx_t3masonry.settings.placeholderColor}
+  T3Mgap = {$plugin.tx_t3masonry.settings.gap}
+  T3McompactGap = {$plugin.tx_t3masonry.settings.compactGap}
+  T3Mradius = {$plugin.tx_t3masonry.settings.radius}
+  T3MrowHeight = {$plugin.tx_t3masonry.settings.rowHeight}
+  T3MmobileColumns = {$plugin.tx_t3masonry.settings.mobileColumns}
+}
+tt_content.media.settings {
+  T3MforceLightbox = {$plugin.tx_t3masonry.settings.forceLightbox}
+  T3MimageMaxWidth = {$plugin.tx_t3masonry.settings.imageMaxWidth}
+  T3McssFile = {$plugin.tx_t3masonry.settings.cssFile}
+  T3MaccentColor = {$plugin.tx_t3masonry.settings.accentColor}
+  T3MtextColor = {$plugin.tx_t3masonry.settings.textColor}
+  T3MmutedColor = {$plugin.tx_t3masonry.settings.mutedColor}
+  T3MplaceholderColor = {$plugin.tx_t3masonry.settings.placeholderColor}
+  T3Mgap = {$plugin.tx_t3masonry.settings.gap}
+  T3McompactGap = {$plugin.tx_t3masonry.settings.compactGap}
+  T3Mradius = {$plugin.tx_t3masonry.settings.radius}
+  T3MrowHeight = {$plugin.tx_t3masonry.settings.rowHeight}
+  T3MmobileColumns = {$plugin.tx_t3masonry.settings.mobileColumns}
+}
+tt_content.textmedia.settings {
+  T3MforceLightbox = {$plugin.tx_t3masonry.settings.forceLightbox}
+  T3MimageMaxWidth = {$plugin.tx_t3masonry.settings.imageMaxWidth}
+  T3McssFile = {$plugin.tx_t3masonry.settings.cssFile}
+  T3MaccentColor = {$plugin.tx_t3masonry.settings.accentColor}
+  T3MtextColor = {$plugin.tx_t3masonry.settings.textColor}
+  T3MmutedColor = {$plugin.tx_t3masonry.settings.mutedColor}
+  T3MplaceholderColor = {$plugin.tx_t3masonry.settings.placeholderColor}
+  T3Mgap = {$plugin.tx_t3masonry.settings.gap}
+  T3McompactGap = {$plugin.tx_t3masonry.settings.compactGap}
+  T3Mradius = {$plugin.tx_t3masonry.settings.radius}
+  T3MrowHeight = {$plugin.tx_t3masonry.settings.rowHeight}
+  T3MmobileColumns = {$plugin.tx_t3masonry.settings.mobileColumns}
+}
+
+# The stylesheet is not added to every page: the gallery partial registers it (with the
+# variables) only on pages that contain a T3Masonry layout.

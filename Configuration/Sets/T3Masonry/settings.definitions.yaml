@@ -1,0 +1,101 @@
+# T3Masonry: site settings (Site Management > Settings).
+# Every setting is also available as TypoScript constant with the same key (TYPO3 12).
+# Keep the defaults in sync with Configuration/TypoScript/constants.typoscript.
+categories:
+  T3Masonry:
+    label: 'T3Masonry'
+  T3Masonry.general:
+    label: 'General'
+    parent: T3Masonry
+  T3Masonry.colors:
+    label: 'Colours'
+    parent: T3Masonry
+  T3Masonry.size:
+    label: 'Size'
+    parent: T3Masonry
+
+settings:
+
+  plugin.tx_t3masonry.settings.forceLightbox:
+    label: 'Lightbox on every image'
+    description: 'On: a click on an image opens the lightbox even without "Enlarge on click". Off: only content elements with "Enlarge on click". Images with a link always open the link.'
+    category: T3Masonry.general
+    type: bool
+    default: true
+
+  plugin.tx_t3masonry.settings.imageMaxWidth:
+    label: 'Maximum image width (px)'
+    description: 'Largest width delivered in the gallery (a half size is added for small screens). 0 = original file.'
+    category: T3Masonry.general
+    type: int
+    default: 900
+
+  plugin.tx_t3masonry.settings.cssFile:
+    label: 'Stylesheet'
+    description: 'Path of the stylesheet with the layouts. Change it only to use your own copy.'
+    category: T3Masonry.general
+    type: string
+    default: 'EXT:t3masonry/Resources/Public/Css/masonry.css'
+
+  plugin.tx_t3masonry.settings.accentColor:
+    label: 'Accent colour'
+    description: 'Focus ring and title badge of the spotlight layout.'
+    category: T3Masonry.colors
+    type: color
+    default: '#3d5afe'
+
+  plugin.tx_t3masonry.settings.textColor:
+    label: 'Text colour'
+    description: 'Titles of the "captions below" layout.'
+    category: T3Masonry.colors
+    type: color
+    default: '#12141a'
+
+  plugin.tx_t3masonry.settings.mutedColor:
+    label: 'Secondary text colour'
+    description: 'Descriptions of the "captions below" layout.'
+    category: T3Masonry.colors
+    type: color
+    default: '#5d6472'
+
+  plugin.tx_t3masonry.settings.placeholderColor:
+    label: 'Placeholder colour'
+    description: 'Shown while an image is loading.'
+    category: T3Masonry.colors
+    type: color
+    default: '#e9ecf1'
+
+  plugin.tx_t3masonry.settings.gap:
+    label: 'Space between the images (px)'
+    description: 'Classic, captions below and justified rows.'
+    category: T3Masonry.size
+    type: int
+    default: 16
+
+  plugin.tx_t3masonry.settings.compactGap:
+    label: 'Compact space between the images (px)'
+    description: 'Spotlight and essential.'
+    category: T3Masonry.size
+    type: int
+    default: 10
+
+  plugin.tx_t3masonry.settings.radius:
+    label: 'Corner radius (px)'
+    description: 'Classic, captions below, justified rows; half of it for spotlight. Essential always has square corners.'
+    category: T3Masonry.size
+    type: int
+    default: 14
+
+  plugin.tx_t3masonry.settings.rowHeight:
+    label: 'Row height of the justified rows (px)'
+    description: 'On phones 60% of this value.'
+    category: T3Masonry.size
+    type: int
+    default: 240
+
+  plugin.tx_t3masonry.settings.mobileColumns:
+    label: 'Columns on phones'
+    description: '1 or 2.'
+    category: T3Masonry.size
+    type: int
+    default: 2
